@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cars & Bids Clone Layout</title>
+  <style>
+    /* ==========================================================================
+       1. CORE RESET & TYPOGRAPHY
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background-color: #ffffff;
+      color: #1a1a1a;
+      padding-bottom: 60px;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ==========================================================================
+       2. HEADER & NAVIGATION
+       ========================================================================== */
+    header {
+      border-bottom: 1px solid #e5e7eb;
+      background: #ffffff;
+    }
+
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 800;
+      color: #111827;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: #3cd070;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 16px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #4b5563;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #111827;
+    }
+
+    .btn-sell {
+      background-color: #3cd070;
+      color: #ffffff !important;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-weight: 600 !important;
+    }
+
+    .btn-sell:hover {
+      background-color: #2bb95f;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-grow: 1;
+      justify-content: flex-end;
+      max-width: 600px;
+    }
+
+    .search-wrapper {
+      position: relative;
+      flex-grow: 1;
+      max-width: 400px;
+    }
+
+    .search-input {
+      width: 100%;
+      background-color: #f3f4f6;
+      border: 1px solid transparent;
+      padding: 10px 16px 10px 40px;
+      border-radius: 6px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .search-input:focus {
+      background-color: #ffffff;
+      border-color: #3cd070;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9ca3af;
+    }
+
+    .btn-signup {
+      background-color: #3cd070;
+      color: white;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-signup:hover {
+      background-color: #2bb95f;
+    }
+
+    /* ==========================================================================
+       3. FEATURED HERO BANNER (Grid System)
+       ========================================================================== */
+    .hero-section {
+      margin-top: 24px;
+      margin-bottom: 40px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 4px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .hero-main {
+      position: relative;
+      height: 450px;
+    }
+
+    .hero-main img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-sidebar {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+      gap: 4px;
+    }
+
+    .sidebar-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+
+    .sidebar-row img {
+      width: 100%;
+      height: 223px;
+      object-fit: cover;
+    }
+
+    /* Floating Badges/Overlays */
+    .badge-featured {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-info-overlay {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      text-align: right;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    }
+
+    .hero-info-overlay h1 {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .hero-info-overlay p {
+      font-size: 14px;
+      opacity: 0.9;
+      margin-top: 2px;
+    }
+
+    .badge-bid-info {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      background-color: rgba(0, 0, 0, 0.75);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .badge-bid-info .time {
+      opacity: 0.8;
+    }
+
+    .badge-bid-info .price {
+      font-weight: 700;
+    }
+
+    /* ==========================================================================
+       4. FILTER / AUCTION CONTROL BAR
+       ========================================================================== */
+    .filter-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      border-bottom: 1px solid #e5e7eb;
+      padding-bottom: 12px;
+    }
+
+    .filter-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .filter-left h2 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-right: 8px;
+    }
+
+    .dropdown {
+      background: white;
+      border: 1px solid #d1d5db;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #4b5563;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dropdown::after {
+      content: '▾';
+      font-size: 12px;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .filter-tabs li a {
+      text-decoration: none;
+      font-size: 14px;
+      color: #6b7280;
+      padding-bottom: 14px;
+      display: inline-block;
+      position: relative;
+    }
+
+    .filter-tabs li.active a {
+      color: #111827;
+      font-weight: 600;
+    }
+
+    .filter-tabs li.active a::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: #111827;
+    }
+
+    /* ==========================================================================
+       5. LOWER AUCTIONS GRID
+       ========================================================================== */
+    .auctions-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .card-image-wrapper {
+      position: relative;
+      height: 180px;
+      width: 100%;
+    }
+
+    .card-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="nav-container">
+      <div class="nav-left">
+        <a href="#" class="logo">Cars<span>&</span>Bids</a>
+        <ul class="nav-links">
+          <li><a href="#">Auctions</a></li>
+          <li><a href="#" class="btn-sell">Sell a Car</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Events</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Leaderboard</a></li>
+        </ul>
+      </div>
+      
+      <div class="nav-right">
+        <div class="search-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" placeholder="Search for cars (ex. BMW, Audi, Ford)">
+        </div>
+        <button class="btn-signup">Sign Up</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container">
+    
+    <section class="hero-section">
+      <div class="hero-grid">
+        <div class="hero-main">
+          <img src="https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1000&q=80" alt="Featured Red Car">
+          <span class="badge-featured">Featured</span>
+          <div class="hero-info-overlay">
+            <h1>1992 Acura NSX</h1>
+            <p>1-Owner, 5-Speed Manual</p>
+          </div>
+          <div class="badge-bid-info">
+            <span class="time">⏱ 2 Days</span>
+            <span class="price">Bid $43,069</span>
+          </div>
+        </div>
+
+        <div class="hero-sidebar">
+          <div class="sidebar-row">
+            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=500&q=80" alt="Interior">
+            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=500&q=80" alt="Front Profile">
+          </div>
+          <div class="sidebar-row">
+            <img src="https://images.unsplash.com/photo-1617469167446-80e4245669c4?auto=format&fit=crop&w=500&q=80" alt="Engine">
+            <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=500&q=80" alt="Gear Shifter">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="filter-bar">
+      <div class="filter-left">
+        <h2>Auctions</h2>
+        <div class="dropdown">Years</div>
+        <div class="dropdown">Transmission</div>
+        <div class="dropdown">Body Style</div>
+      </div>
+      <ul class="filter-tabs">
+        <li class="active"><a href="#">Ending soon</a></li>
+        <li><a href="#">Newly listed</a></li>
+        <li><a href="#">No reserve</a></li>
+        <li><a href="#">Lowest mileage</a></li>
+        <li><a href="#">Closest to me</a></li>
+      </ul>
+    </section>
+
+    <section class="auctions-grid">
+      <div class="card">
+        <div class="card-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=400&q=80" alt="Porsche">
+          <span class="badge-featured">Featured</span>
+          <div class="badge-bid-info">
+            <span class="time">⏱ 2 Days</span>
+            <span class="price">Bid $75,500</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1566008889980-60b6bbf20d29?auto=format&fit=crop&w=400&q=80" alt="Lotus">
+          <span class="badge-featured">Featured</span>
+          <div class="badge-bid-info">
+            <span class="time">⏱ 2 Days</span>
+            <span class="price">Bid $75,500</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=400&q=80" alt="BMW">
+          <span class="badge-featured">Featured</span>
+          <div class="badge-bid-info">
+            <span class="time">⏱ 2 Days</span>
+            <span class="price">Bid $60,000</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1525609004556-c46c7d6cf0a3?auto=format&fit=crop&w=400&q=80" alt="Convertible">
+          <div class="badge-bid-info">
+            <span class="time">⏱ 2 Days</span>
+            <span class="price">Bid $17,000</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</body>
+</html>
